@@ -16,7 +16,7 @@ module.exports = {
   },
   mode,
   resolve: {
-    extensions: ['.ts', '.js', '.json'],
+    extensions: ['.ts', '.js'],
   },
   devServer: {
     port: 8080,
@@ -38,7 +38,7 @@ module.exports = {
     }),
     new CopyWebpackPlugin({
       patterns: [
-        { 
+        {
           from: path.resolve(__dirname, 'src', 'assets'),
           noErrorOnMissing: true, // to cancel Error message when folder is empty
         }

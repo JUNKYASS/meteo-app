@@ -5,6 +5,7 @@
     "target": "ES5",
     "moduleResolution": "node",
     "noEmitOnError": true,
+    "resolveJsonModule": true,
     "lib": [
       "es2016",
       "dom",
