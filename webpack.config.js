@@ -6,19 +6,31 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const mode = process.env.NODE_ENV === 'development' ? 'development' : 'production';
 
 module.exports = {
-  entry: path.resolve(__dirname, 'src', 'index.ts'),
+  entry: {
+    'app': path.resolve(__dirname, 'src', 'index.ts'),
+    'service-worker': path.resolve(__dirname, 'src', 'service-worker.ts'),
+  },
   output: {
-    filename: 'bundle.js',
+    filename: '[name].js',
     path: path.resolve(__dirname, 'dist'),
   },
   mode,
   resolve: {
-    extensions: ['.ts', '.js'],
+    extensions: ['.ts', '.js', '.json'],
   },
   devServer: {
     port: 8080,
     open: true,
     watchFiles: ['./src/index.html']
+  },
+  module: {
+    rules: [
+      {
+        test: /\.ts?$/,
+        use: 'ts-loader',
+        exclude: /node_modules/,
+      },
+    ],
   },
   plugins: [
     new HTMLWebpackPlugin({
@@ -34,13 +46,4 @@ module.exports = {
     }),
     new CleanWebpackPlugin(),
   ],
-  module: {
-    rules: [
-      {
-        test: /\.tsx?$/,
-        use: 'ts-loader',
-        exclude: /node_modules/,
-      },
-    ],
-  },
 };

@@ -1,11 +1,22 @@
 {
   "compilerOptions": {
-    "outDir": "./dist/",
-    "noImplicitAny": true,
-    "module": "es6",
-    "target": "es5",
-    "lib": ["webworker", "es5"],
-    "allowJs": true,
-    "moduleResolution": "node"
+    "outDir": "./dist",
+    "module": "commonjs",
+    "target": "ES5",
+    "moduleResolution": "node",
+    "noEmitOnError": true,
+    "lib": [
+      "es2016",
+      "dom",
+      "WebWorker"
+    ]
   },
+  "include": [
+    "global.d.ts",
+    "images.d.ts",
+    "./src/**/*.ts",
+    "./src/**/*.tsx",
+    "./src/**/*.js",
+    "./src/**/*.jsx"
+  ]
 }
