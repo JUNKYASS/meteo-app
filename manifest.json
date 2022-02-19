@@ -1,9 +1,0 @@
-{
-  "theme_color" : "#f69435",
-  "background_color" : "#f69435",
-  "display" : "browser",
-  "scope" : "/",
-  "start_url" : "/",
-  "name" : "Meteo-app",
-  "short_name" : "Meteo-app"
-}

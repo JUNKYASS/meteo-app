@@ -1,5 +1,5 @@
-import { registerServicerWorker } from './utils';
+import { registerServiceWorker } from './utils';
 
 window.addEventListener('load', () => {
-  registerServicerWorker();
+  registerServiceWorker();
 });
