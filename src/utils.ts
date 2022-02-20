@@ -1,6 +1,6 @@
 const isServiceWorkerSupported: () => boolean = () => ('serviceWorker' in navigator);
 
-export const registerServicerWorker = (): void => {
+export const registerServiceWorker = (): void => {
   let nav: any = navigator;
 
   if (isServiceWorkerSupported()) {

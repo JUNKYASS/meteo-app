@@ -1,7 +1,9 @@
-import { registerServicerWorker } from './utils';
+import { registerServiceWorker } from './utils';
+import * as jsonData from './data/precipitation.json';
 
 window.addEventListener('load', () => {
-  registerServicerWorker();
+  registerServiceWorker();
+
   const db = new DBServices();
 });
 

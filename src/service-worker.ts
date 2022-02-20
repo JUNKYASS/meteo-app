@@ -2,12 +2,11 @@ declare var self: ServiceWorkerGlobalScope;
 
 const CACHE = 'cache-and-update-v1';
 
-// При установке воркера мы должны закешировать часть данных (статику).
-self.addEventListener('install', (event) => {
+self.addEventListener('install', (event) => { // After worker installed we will cache static data
   console.log('[SW] installed');
 
   event.waitUntil(
-    caches.open(CACHE).then((cache) => cache.addAll(['utils.ts']))
+    caches.open(CACHE).then((cache) => cache.addAll(['index.html', 'app.js']))
   );
 });
 
@@ -15,18 +14,15 @@ self.addEventListener('activate', (event) => {
   console.log('[SW] activated');
 });
 
-// при событии fetch, мы используем кэш, и только потом обновляем его данным с сервера
-// self.addEventListener('fetch', (event) => {
-//   console.log('[SW] request has been sent to the server');
+self.addEventListener('fetch', (event) => { // Use cache first if we have "fetch" and then update it using data from the server
+  console.log('[SW] request has been sent to the server');
 
-//   // Мы используем `respondWith()`, чтобы мгновенно ответить без ожидания ответа с сервера.
-//   // event.respondWith(fromCache(event.request));
-//   // `waitUntil()` нужен, чтобы предотвратить прекращение работы worker'a до того как кэш обновиться.
-//   event.waitUntil(update(event.request));
-// });
+  event.respondWith(fromCache(event.request)); // To response immediately without waiting data from the server
+  event.waitUntil(update(event.request)); // Ask for the data from the server and make update
+});
 
-async function fromCache(request) {
-  return caches.match(request).then(matching => matching ?? Promise.reject('no-match'));
+function fromCache(request) {
+  return caches.open(CACHE).then(cache => cache.match(request).then(matching => matching ?? Promise.reject('no-match')));
 }
 
 function update(request) {
